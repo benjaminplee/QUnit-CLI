@@ -1,6 +1,22 @@
-test("Adding numbers works", function() {
-    expect(3);
-    ok(newAddition, "function exists");
-    equals(4, newAddition(2, 2), "2 + 2 = 4");
-    equals(100, newAddition(100, 0), "zero is zero");
-});
+var myLibTests = function() {
+
+    test("Adding numbers", function() {
+	expect(3);
+	ok(newAddition, "function exists");
+	equals(newAddition(2, 2), 4, "2 + 2 = 4");
+	equals(newAddition(100, 0), 100, "zero is zero");
+    });
+
+    test("Subtracting numbers", function() {
+	expect(2);
+	ok(newSubtraction, "subtraction function exists");
+	equals(newSubtraction(2, 2), 0, "2 - 2 = 0");
+    });
+};
+
+if(typeof document !== "undefined" && typeof jQuery !== "undefined") {
+    jQuery(myLibTests);
+}
+else {
+    myLibTests();
+}
