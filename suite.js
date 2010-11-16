@@ -1,4 +1,4 @@
-load("../qunit/qunit/qunit.js");
+load("./qunit/qunit/qunit.js");
 
 (function() {
 
