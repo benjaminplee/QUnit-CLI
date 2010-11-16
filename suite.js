@@ -1,10 +1,11 @@
 load("../qunit/qunit/qunit.js");
 
 (function() {
-    QUnit.init();
-    QUnit.config.blocking = false;
-    QUnit.config.autorun = true;
-    QUnit.config.updateRate = 0;
+
+QUnit.init();
+QUnit.config.blocking = true;
+QUnit.config.autorun = true;
+QUnit.config.updateRate = 0;
 
     var stop_watch = {
 	start_time: null, stop_time: null,
@@ -28,6 +29,7 @@ load("../qunit/qunit/qunit.js");
 
     QUnit.testStart = function(name) {
 	current_test_name = name;
+	current_test_assertions = [];
     };
 
     QUnit.testDone = function(name, fail_count, total_count) {
@@ -73,9 +75,10 @@ load("../qunit/qunit/qunit.js");
     };
 
     stop_watch.start(); // hacked b/c QUnit.begin only executes in a browser env on dom ready
+
 })();
-
-
 
 load("myLib.js");
 load("myLibTest.js");
+
+QUnit.start();
