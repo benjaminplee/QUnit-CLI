@@ -8,5 +8,5 @@ test("Adding numbers", function() {
 test("Subtracting numbers", function() {
     expect(2);
     ok(newSubtraction, "subtraction function exists");
-    equals(newSubtraction(2, 2), 0, "2 - 2 = 0");
+    equals(newSubtraction(2, 2), 0, "Intended bug!!!");
 });

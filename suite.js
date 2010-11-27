@@ -1,4 +1,21 @@
 load("./qunit/qunit/qunit.js");
+load("myLib.js");
+
+var stop_watch = {
+    start_time: null, stop_time: null,
+
+    start: function() {
+	this.start_time = new Date();
+    },
+
+    stop: function() {
+	this.stop_time = new Date();
+    },
+
+    elapsed_seconds: function() {
+	return ( this.stop_time.getMilliseconds() - this.start_time.getMilliseconds() ) / 1000;
+    }
+};
 
 (function() {
 
@@ -17,22 +34,6 @@ load("./qunit/qunit/qunit.js");
 	    return current_object_parser(obj);
 	}
     });
-
-    var stop_watch = {
-	start_time: null, stop_time: null,
-
-	start: function() {
-	    this.start_time = new Date();
-	},
-
-	stop: function() {
-	    this.stop_time = new Date();
-	},
-
-	elapsed_seconds: function() {
-	    return ( this.stop_time.getMilliseconds() - this.start_time.getMilliseconds() ) / 1000;
-	}
-    };
 
     var current_test_name = null;
     var current_test_assertions = [];
@@ -75,7 +76,6 @@ load("./qunit/qunit/qunit.js");
 	current_test_assertions.push([outcome, type, details.message, response].join("|"));
     };
 
-    // executing twice per test?
     QUnit.done = function() {
 	stop_watch.stop();
 
@@ -85,11 +85,15 @@ load("./qunit/qunit/qunit.js");
 	print("----------------------------------------");
     };
 
-    stop_watch.start(); // hacked b/c QUnit.begin only executes in a browser env on dom ready
+    QUnit.begin = function() {
+	stop_watch.start();
+    }
 
 })();
 
-load("myLib.js");
+// run the tests
 load("myLibTest.js");
+load("./qunit/test/test.js");
 
+QUnit.begin(); // hacked b/c currently QUnit.begin is normally called on document.load
 QUnit.start();
