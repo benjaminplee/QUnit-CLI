@@ -3,5 +3,5 @@ function newAddition(x, y) {
 }
 
 function newSubtraction(x, y) {
-    return x - y - y; // bug!
+    return x - y - y; // Intended bug!
 }

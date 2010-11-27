@@ -2,10 +2,21 @@ load("./qunit/qunit/qunit.js");
 
 (function() {
 
-QUnit.init();
-QUnit.config.blocking = true;
-QUnit.config.autorun = true;
-QUnit.config.updateRate = 0;
+    QUnit.init();
+    QUnit.config.blocking = true;
+    QUnit.config.autorun = true;
+    QUnit.config.updateRate = 0;
+
+    // Hack for Rhino's error objects
+    var current_object_parser = QUnit.jsDump.parsers.object;
+    QUnit.jsDump.setParser('object', function(obj) {
+	if(typeof obj.rhinoException !== 'undefined') {
+	    return obj.name + " { message: '" + obj.message + "', fileName: '" + obj.fileName + "', lineNumber: " + obj.lineNumber + " }";
+	}
+	else {
+	    return current_object_parser(obj);
+	}
+    });
 
     var stop_watch = {
 	start_time: null, stop_time: null,
