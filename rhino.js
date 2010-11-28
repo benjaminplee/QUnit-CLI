@@ -1,5 +1,5 @@
-load("./qunit/qunit/qunit.js");
-load("myLib.js");
+load("qunit/qunit/qunit.js");
+load("src/myLib.js");
 
 var stop_watch = {
     start_time: null, stop_time: null,
@@ -92,8 +92,8 @@ var stop_watch = {
 })();
 
 // run the tests
-load("myLibTest.js");
-load("./qunit/test/test.js");
+load("test/myLibTest.js");
+load("qunit/test/test.js");
 
 QUnit.begin(); // hacked b/c currently QUnit.begin is normally called on document.load
 QUnit.start();
