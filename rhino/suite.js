@@ -19,6 +19,8 @@ var stop_watch = {
 
 (function() {
 
+    var out = (typeof println !== "undefined") ? println : print;
+
     QUnit.init();
     QUnit.config.blocking = true;
     QUnit.config.autorun = true;
@@ -46,17 +48,17 @@ var stop_watch = {
 
     QUnit.testDone = function(name, fail_count, total_count) {
 	if(fail_count > 0) {
-	    print("FAIL - " + name);
+	    out("FAIL - " + name);
 
 	    for(var i = 0; i < current_test_assertions.length; i++) {
-		print("    " + current_test_assertions[i]);
+		out("    " + current_test_assertions[i]);
 	    }
 
 
 	    totals.fail = totals.fail + 1;
 	}
 	else {
-	    print("PASS - " + name);
+	    out("PASS - " + name);
 	    totals.pass = totals.pass + 1;
 	}
     };
@@ -79,10 +81,10 @@ var stop_watch = {
     QUnit.done = function() {
 	stop_watch.stop();
 
-	print("----------------------------------------");
-	print(" PASS: " + totals.pass + "  FAIL: " + totals.fail + "  TOTAL: " + (totals.pass + totals.fail));
-	print(" Finished in " + stop_watch.elapsed_seconds() + " seconds.");
-	print("----------------------------------------");
+	out("----------------------------------------");
+	out(" PASS: " + totals.pass + "  FAIL: " + totals.fail + "  TOTAL: " + (totals.pass + totals.fail));
+	out(" Finished in " + stop_watch.elapsed_seconds() + " seconds.");
+	out("----------------------------------------");
     };
 
     QUnit.begin = function() {
